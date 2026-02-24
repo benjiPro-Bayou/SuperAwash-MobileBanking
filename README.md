@@ -39,3 +39,17 @@ This is a React Native (Expo) prototype for the "Super Awash" mobile banking app
 *   `src/screens`: Application screens.
 *   `src/navigation`: Navigation configuration.
 *   `src/constants`: Theme and global constants.
+
+# If you prefer to build it on your own machine (requires Android Studio and Java JDK installed):
+
+## Prebuild the Project: (This converts the Expo project to a native Android project)
+npx expo prebuild
+
+# Navigate to Android Folder:
+cd android
+
+# Build the APK:
+./gradlew assembleRelease
+Find the APK: The generated APK will be located at: android/app/build/outputs/apk/release/app-release.apk
+
+

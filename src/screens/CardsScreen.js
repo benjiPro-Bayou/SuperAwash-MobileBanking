@@ -19,11 +19,11 @@ const CardsScreen = () => {
               <Text style={styles.bankName}>Awash Bank</Text>
               <Text style={styles.cardType}>Visa Platinum</Text>
             </View>
-            <Text style={styles.cardNumber}>**** **** **** 1234</Text>
+            <Text style={styles.cardNumber}>7*** **** **** 1234</Text>
             <View style={styles.cardFooter}>
               <View>
                 <Text style={styles.label}>Card Holder</Text>
-                <Text style={styles.value}>BINIYAM MOGES</Text>
+                <Text style={styles.value}>BINIYAM TESSEMA</Text>
               </View>
               <View>
                 <Text style={styles.label}>Expires</Text>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     height: 200,
-    backgroundColor: COLORS.primary,
+    backgroundColor: '#373689',
     borderRadius: 16,
     padding: 20,
     justifyContent: 'space-between',

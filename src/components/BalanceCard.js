@@ -1,48 +1,60 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { Eye, EyeOff, Plus, CreditCard } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Eye, EyeOff, Plus, Copy, MoreHorizontal, CreditCard } from 'lucide-react-native';
 import { COLORS, SIZES } from '../constants/theme';
-
-const { width } = Dimensions.get('window');
 
 const BalanceCard = () => {
   const [visible, setVisible] = useState(true);
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['white', '#F8FAFC']}
-        style={styles.card}
-      >
-        <View style={styles.topRow}>
-          <View>
-            <Text style={styles.label}>Total Balance</Text>
-            <View style={styles.amountRow}>
-              <Text style={styles.currency}>ETB</Text>
-              <Text style={styles.amount}>
-                {visible ? '145,250.00' : '••••••••'}
-              </Text>
+      <View style={styles.card}>
+        {/* Top Section: Account Info */}
+        <View style={styles.header}>
+          <View style={styles.accountRow}>
+            <View style={styles.iconContainer}>
+              <CreditCard color="white" size={18} />
+            </View>
+            <View>
+              <Text style={styles.accountLabel}>Saving Account</Text>
+              <View style={styles.numberRow}>
+                <Text style={styles.accountNumber}>1000 **** **** 1234</Text>
+                <TouchableOpacity style={styles.copyBtn}>
+                  <Copy size={12} color={COLORS.textSecondary} />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <TouchableOpacity onPress={() => setVisible(!visible)} style={styles.eyeBtn}>
-            {visible ? <Eye color={COLORS.primary} size={20} /> : <EyeOff color={COLORS.textSecondary} size={20} />}
+          <TouchableOpacity>
+            <MoreHorizontal color={COLORS.textSecondary} size={20} />
           </TouchableOpacity>
         </View>
 
+        {/* Middle Section: Balance */}
+        <View style={styles.balanceContainer}>
+          <Text style={styles.currencyLabel}>Total Balance</Text>
+          <View style={styles.balanceRow}>
+            <Text style={styles.currency}>ETB</Text>
+            <Text style={styles.amount}>
+              {visible ? '145,250.00' : '••••••••'}
+            </Text>
+            <TouchableOpacity onPress={() => setVisible(!visible)} style={styles.eyeBtn}>
+              {visible ? <Eye color={COLORS.primary} size={22} /> : <EyeOff color="#9CA3AF" size={22} />}
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Divider */}
         <View style={styles.divider} />
 
-        <View style={styles.accountRow}>
-          <View style={styles.accountInfo}>
-            <CreditCard color={COLORS.textSecondary} size={16} />
-            <Text style={styles.accountNum}>1000 **** **** 1234</Text>
+        {/* Bottom Section: Action */}
+        <TouchableOpacity style={styles.topUpBtn}>
+          <View style={styles.plusCircle}>
+            <Plus color="white" size={14} />
           </View>
-          <TouchableOpacity style={styles.addBtn}>
-            <Plus color="white" size={16} />
-            <Text style={styles.addBtnText}>Top Up</Text>
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
+          <Text style={styles.topUpText}>Top Up Account</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -50,34 +62,114 @@ const BalanceCard = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: SIZES.padding,
-    marginTop: -40, // Pull up to overlap header
+    marginTop: -85, // Pulls the card up over the header
+    zIndex: 10,
   },
   card: {
-    borderRadius: 20,
+    backgroundColor: 'white',
+    borderRadius: 24,
     padding: 20,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.08,
+    shadowRadius: 20,
+    elevation: 8, // Android shadow
   },
-  topRow: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    marginBottom: 20,
+  },
+  accountRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 12,
+    backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  accountLabel: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    fontWeight: '500',
+    marginBottom: 2,
+  },
+  numberRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  accountNumber: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: COLORS.text,
+    marginRight: 6,
+    letterSpacing: 0.5,
+  },
+  copyBtn: {
+    padding: 2,
+  },
+  balanceContainer: {
+    marginBottom: 20,
+  },
+  currencyLabel: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    fontWeight: '500',
+    marginBottom: 4,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  balanceRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+  },
+  currency: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+    marginRight: 6,
+  },
+  amount: {
+    fontSize: 34,
+    fontWeight: '800',
+    color: COLORS.text,
+    marginRight: 12,
+    letterSpacing: -0.5,
+  },
+  eyeBtn: {
+    transform: [{ translateY: 2 }],
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#F3F4F6',
     marginBottom: 15,
   },
-  label: { fontSize: 12, color: COLORS.textSecondary, marginBottom: 5, fontWeight: '500' },
-  amountRow: { flexDirection: 'row', alignItems: 'baseline' },
-  currency: { fontSize: 16, fontWeight: '600', color: COLORS.textSecondary, marginRight: 5 },
-  amount: { fontSize: 32, fontWeight: 'bold', color: COLORS.primary },
-  eyeBtn: { padding: 5 },
-  divider: { height: 1, backgroundColor: '#F1F5F9', marginVertical: 15 },
-  accountRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  accountInfo: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#F1F5F9', paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 },
-  accountNum: { marginLeft: 8, color: COLORS.textSecondary, fontSize: 12, fontWeight: '500' },
-  addBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: COLORS.secondary, paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20 },
-  addBtnText: { color: 'white', fontSize: 12, fontWeight: 'bold', marginLeft: 5 },
+  topUpBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+  },
+  plusCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: COLORS.secondary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  topUpText: {
+    color: COLORS.secondary,
+    fontSize: 14,
+    fontWeight: '700',
+  },
 });
 
 export default BalanceCard;

@@ -36,7 +36,7 @@ const SettingsScreen = () => {
       <ScrollView contentContainerStyle={styles.scroll}>
         {/* Profile Header */}
         <LinearGradient
-          colors={[COLORS.primary, '#0077BE']}
+          colors={[COLORS.primary, '#373689']}
           style={styles.header}
         >
           <View style={styles.profileRow}>
@@ -45,7 +45,7 @@ const SettingsScreen = () => {
               style={styles.avatar} 
             />
             <View style={styles.profileInfo}>
-              <Text style={styles.name}>Biniyam Moges</Text>
+              <Text style={styles.name}>Biniyam Tessema</Text>
               <Text style={styles.phone}>+251 91 234 5678</Text>
               <TouchableOpacity style={styles.editBtn}>
                 <Text style={styles.editBtnText}>Edit Profile</Text>
